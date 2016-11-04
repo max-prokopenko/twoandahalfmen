@@ -1,1 +1,400 @@
-Hello world!
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Palautteenkeruu - Ohjelmistosuunnittelun tehokkuus</title>
+<link rel="icon" href="images/icon.ico" />
+
+<link type="text/css" href="css/bootstrap.css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+<div class="container">
+
+  <div id="otsikkoalue">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    	<h2 class="text-center">&nbsp;<span class="glyphicon glyphicon-check" aria-hidden="true" style="color:#3355ff; font-size: 55px; text-shadow: 2px 2px 5px #000;"></span></h2>
+      	<h1 class="text-center" style="text-shadow: 2px 2px 5px #000;">Palautteenkeruu</h1>
+      	<h3 class="text-center" style="text-shadow: 2px 2px 5px #000;">Kysely, jolla mitataan ohjelmistosuunnittelun tehokkuutta.<br /><br />(Ei toimi; varsinainen Google form -kysely sivun alaosassa)</h3>
+      <br />
+    </div>
+  </div>
+  </div>
+  
+  
+  <hr>
+
+
+<form class="kysely">
+
+
+
+	<!-- Kysymys 1 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>1. Millä päätelaitteella vastaat kyselyyn?</h4>
+		<br />
+        <div class="form-keskitys">
+        <label for="Kysymys1_1" class="text-center">
+          <input type="radio" name="Kysymys1" class="eka" value="1" id="Kysymys1_1" />&nbsp;&nbsp;Tietokoneella</label>
+        <label for="Kysymys1_2" class="text-center">
+          <input type="radio" name="Kysymys1" class="eka" value="2" id="Kysymys1_2" />&nbsp;&nbsp;Mobiililaitteella</label>
+          </div>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+
+
+	<hr>
+
+
+	<!-- Kysymys 2 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>2. Kuinka tehokkaasti tiimi työskentelee yhdessä?</h4>
+		<br />
+        <div class="form-keskitys">
+        <label>Heikosti</label>
+        <label for="Kysymys2_1" class="text-center">
+        	1
+            <br />
+          <input type="radio" name="Kysymys1" value="1" id="Kysymys2_1">
+          </label>
+        <label for="Kysymys2_2" class="text-center">
+        	2
+            <br />
+          <input type="radio" name="Kysymys2" value="2" id="Kysymys2_2">
+          </label>
+        <label for="Kysymys2_3" class="text-center">
+        	3
+            <br />
+          <input type="radio" name="Kysymys2" value="3" id="Kysymys2_3">
+          </label>
+        <label for="Kysymys2_4" class="text-center">
+        	4
+            <br />
+          <input type="radio" name="Kysymys2" value="4" id="Kysymys2_4">
+          </label>
+        <label for="Kysymys2_5" class="text-center">
+        	5
+            <br />
+          <input type="radio" name="Kysymys2" value="5" id="Kysymys2_5">
+          </label>
+          <label>Tehokkaasti</label>
+          </div>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+  
+  
+  <hr>
+  
+  
+	<!-- Kysymys 3 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>3. Millainen ryhmähenki tiimissänne on?</h4>
+		<br />
+        <div class="form-keskitys">
+        <label>Heikko</label>
+        <label for="Kysymys3_1" class="text-center">
+        	1
+            <br />
+          <input type="radio" name="Kysymys3" value="1" id="Kysymys3_1">
+          </label>
+        <label for="Kysymys3_2" class="text-center">
+        	2
+            <br />
+          <input type="radio" name="Kysymys3" value="2" id="Kysymys3_2">
+          </label>
+        <label for="Kysymys3_3" class="text-center">
+        	3
+            <br />
+          <input type="radio" name="Kysymys3" value="3" id="Kysymys3_3">
+          </label>
+        <label for="Kysymys3_4" class="text-center">
+        	4
+            <br />
+          <input type="radio" name="Kysymys3" value="4" id="Kysymys3_4">
+          </label>
+        <label for="Kysymys3_5" class="text-center">
+        	5
+            <br />
+          <input type="radio" name="Kysymys3" value="5" id="Kysymys3_5">
+          </label>
+          <label>Vahva</label>
+          </div>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+
+
+	<hr>
+    
+    
+	<!-- Kysymys 4 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>4. Kuinka hyvin tiimiviestintä on toiminut?</h4>
+		<br />
+        <div class="form-keskitys">
+        <label>Heikosti</label>
+        <label for="Kysymys4_1" class="text-center">
+        	1
+            <br />
+          <input type="radio" name="Kysymys4" value="1" id="Kysymys4_1">
+          </label>
+        <label for="Kysymys4_2" class="text-center">
+        	2
+            <br />
+          <input type="radio" name="Kysymys4" value="2" id="Kysymys4_2">
+          </label>
+        <label for="Kysymys4_3" class="text-center">
+        	3
+            <br />
+          <input type="radio" name="Kysymys4" value="3" id="Kysymys4_3">
+          </label>
+        <label for="Kysymys4_4" class="text-center">
+        	4
+            <br />
+          <input type="radio" name="Kysymys4" value="4" id="Kysymys4_4">
+          </label>
+        <label for="Kysymys4_5" class="text-center">
+        	5
+            <br />
+          <input type="radio" name="Kysymys4" value="5" id="Kysymys4_5">
+          </label>
+          <label>Erinomaisesti</label>
+          </div>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+  
+  
+  <hr>
+  
+  
+	<!-- Kysymys 5 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>5. Kuinka hyvin ryhmän roolijako on onnistunut?</h4>
+		<br />
+        <div class="form-keskitys">
+        <label>Heikosti</label>
+        <label for="Kysymys5_1" class="text-center">
+        	1
+            <br />
+          <input type="radio" name="Kysymys5" value="1" id="Kysymys5_1">
+          </label>
+        <label for="Kysymys5_2" class="text-center">
+        	2
+            <br />
+          <input type="radio" name="Kysymys5" value="2" id="Kysymys5_2">
+          </label>
+        <label for="Kysymys5_3" class="text-center">
+        	3
+            <br />
+          <input type="radio" name="Kysymys5" value="3" id="Kysymys5_3">
+          </label>
+        <label for="Kysymys5_4" class="text-center">
+        	4
+            <br />
+          <input type="radio" name="Kysymys5" value="4" id="Kysymys5_4">
+          </label>
+        <label for="Kysymys5_5" class="text-center">
+        	5
+            <br />
+          <input type="radio" name="Kysymys5" value="5" id="Kysymys5_5">
+          </label>
+          <label>Erinomaisesti</label>
+          </div>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+  
+  
+  <hr>
+  
+  
+	<!-- Kysymys 6 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>6. Mitä työkaluja tiimi on käyttänyt?</h4>
+		<br />
+    <div class="form-keskitys-checkbox">
+    <label for="Kysymys6_1">
+      <input type="checkbox" name="Kysymys6" value="checkbox" id="Kysymys6_1">
+      Slack</label>
+    <label for="Kysymys6_2">
+      <input type="checkbox" name="Kysymys6" value="checkbox" id="Kysymys6_2">
+      Github</label>
+    <label for="Kysymys6_3">
+      <input type="checkbox" name="Kysymys6" value="checkbox" id="Kysymys6_3">
+      Trello</label>
+    <label for="Kysymys6_4">
+      <input type="checkbox" name="Kysymys6" value="checkbox" id="Kysymys6_4">
+      Whatsapp</label>
+    <label for="Kysymys6_5">
+      <input type="checkbox" name="Kysymys6" value="checkbox" id="Kysymys6_5">
+      Google forms</label>
+    <label for="Kysymys6_6">
+      <input type="checkbox" name="Kysymys6" value="checkbox" id="Kysymys6_6">
+      Joku muu</label>
+    </div>
+    <br>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+  
+  
+  <hr>
+  
+  
+  	<!-- Kysymys 7 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>7. Kuinka miellyttävä meidän luoman html-kyselyn käyttöliittymä on käytettävyydeltään?</h4>
+		<br />
+        <div class="form-keskitys">
+        <label>Heikko</label>
+        <label for="Kysymys7_1" class="text-center">
+        	1
+            <br />
+          <input type="radio" name="Kysymys7" value="1" id="Kysymys7_1">
+          </label>
+        <label for="Kysymys7_2" class="text-center">
+        	2
+            <br />
+          <input type="radio" name="Kysymys7" value="2" id="Kysymys7_2">
+          </label>
+        <label for="Kysymys7_3" class="text-center">
+        	3
+            <br />
+          <input type="radio" name="Kysymys7" value="3" id="Kysymys7_3">
+          </label>
+        <label for="Kysymys7_4" class="text-center">
+        	4
+            <br />
+          <input type="radio" name="Kysymys7" value="4" id="Kysymys7_4">
+          </label>
+        <label for="Kysymys7_5" class="text-center">
+        	5
+            <br />
+          <input type="radio" name="Kysymys7" value="5" id="Kysymys7_5">
+          </label>
+          <label>Erinomainen</label>
+          </div>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+  
+  
+  <hr>
+  
+  
+    <!-- Kysymys 8 -->
+  <div class="row formi">
+  	<div class="col-lg-2 col-md-1"></div>
+    <div class="col-lg-8 col-md-10">
+        <h4>8. Entä ulkoasultaan?</h4>
+		<br />
+        <div class="form-keskitys">
+        <label>Heikko</label>
+        <label for="Kysymys8_1" class="text-center">
+        	1
+            <br />
+          <input type="radio" name="Kysymys8" value="1" id="Kysymys8_1">
+          </label>
+        <label for="Kysymys8_2" class="text-center">
+        	2
+            <br />
+          <input type="radio" name="Kysymys8" value="2" id="Kysymys8_2">
+          </label>
+        <label for="Kysymys8_3" class="text-center">
+        	3
+            <br />
+          <input type="radio" name="Kysymys8" value="3" id="Kysymys8_3">
+          </label>
+        <label for="Kysymys8_4" class="text-center">
+        	4
+            <br />
+          <input type="radio" name="Kysymys8" value="4" id="Kysymys8_4">
+          </label>
+        <label for="Kysymys8_5" class="text-center">
+        	5
+            <br />
+          <input type="radio" name="Kysymys8" value="5" id="Kysymys8_5">
+          </label>
+          <label>Erinomainen</label>
+          </div>
+    </div>
+    <div class="col-lg-2 col-md-1"></div>
+  </div>
+  
+
+	<br />
+  
+  
+  <div class="btn btn-default disabled sendBtn">Lähetä</div>
+  
+  
+  <hr>  
+   
+    
+</form>
+
+
+<br />
+<a href="https://docs.google.com/forms/d/e/1FAIpQLScO0Dg1ztyGZ83UKOj0YmwPLkHOT6TzPXxyTSG4Ne7zQvFHbQ/viewform" target="_blank" style="color:#3355ff;">
+<h2 class="text-center"><span class="glyphicon glyphicon-new-window" aria-hidden="true" style="font-size: 25px;"></span>&nbsp;&nbsp;Google form - linkki</h2>
+</a>
+<!--<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScO0Dg1ztyGZ83UKOj0YmwPLkHOT6TzPXxyTSG4Ne7zQvFHbQ/viewform?embedded=true">Ladataan...</iframe>-->
+<h4 class="text-center">(Avautuu uuteen välilehteen)</h4>
+
+<br />
+<br />
+
+
+	<!-- footer
+  <div class="row">
+    <div class="text-center col-md-6 col-md-offset-3">
+      <h4>Footer </h4>
+      <p>Copyright &copy; 2015 &middot; All Rights Reserved &middot; <a href="http://yourwebsite.com/" >My Website</a></p>
+    </div>
+  </div>
+  -->
+</div>	<!-- container -->
+</div>	<!-- container-fluid -->
+
+
+
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86818542-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
