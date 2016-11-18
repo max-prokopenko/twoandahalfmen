@@ -4,7 +4,9 @@
     padding: 10px;
     font-family: 'Open Sans', sans-serif;
     text-align: justify;
+    transition: all .2s ease-in-out;
 }
+
 .card-overlay h3 {
 	font-family: 'Oswald', sans-serif;
 }

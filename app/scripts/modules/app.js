@@ -1,6 +1,4 @@
-
-
-
+require('bootstrap');
 
 import kysely from "./kysely.js";
 
