@@ -33,10 +33,12 @@ var paths = {
 
 gulp.task('es6', function() {
     browserify("./app/scripts/modules/app.js")
-      .transform("babelify", {presets: ["es2015"]})
-      .bundle()
-      .pipe(fs.createWriteStream("./dist/scripts/bundle.js"));
-  });
+        .transform("babelify", {
+            presets: ["es2015"]
+        })
+        .bundle()
+        .pipe(fs.createWriteStream("./dist/scripts/bundle.js"));
+});
 
 
 
@@ -92,10 +94,8 @@ gulp.task('images', function() {
 });
 
 gulp.task('html', function() {
-    gulp.src('index.html', {
-        cwd: paths.app
-    })
-        .pipe(gulp.dest(paths.dist))
+    return gulp.src('app/*.html')
+        .pipe(gulp.dest('dist/'))
         .pipe(notify({
             message: 'HTML done'
         }));
@@ -129,12 +129,12 @@ gulp.task('watch', function() {
     gulp.watch('app/images/**/*', [
         ['images'], browserSync.reload
     ]);
-    gulp.watch('app/index.html', [
+    gulp.watch('app/*.html', [
         ['html'], browserSync.reload
     ]);
-     gulp.watch('app/scripts/modules/**/*', [
+    gulp.watch('app/scripts/modules/**/*', [
         ['es6'], browserSync.reload
     ]);
-    
+
     gulp.start('browser-sync');
 });

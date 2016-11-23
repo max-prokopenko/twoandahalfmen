@@ -44,9 +44,10 @@ var kysely = {
         xmlhttp.send();
     },
     bindEvents: function() {
-        $(".answer ").on("click", function() {
+        $(".answer").on("click", function() {
             kysely.select($(this).data("id"));
         });
+
     },
     render: function(dataIn) {
         var data = {
