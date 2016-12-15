@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	
+	body {
+	    background-color: #000;
+	    margin: 0;
+	}
+
+	#canvas {
+	    position: absolute;
+	    margin: auto;
+	    width: 768px;
+	    height: 768px;
+	    top: 0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+	}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+<script type="text/javascript">
+window.addEventListener('load', function() {
+    var scripts=document.body.getElementsByTagName('script');
+    var canvases=document.body.getElementsByTagName('canvas');
+    new Processing(canvases[0], scripts[0].text);
+}
+, false);
+
+
+/* Processing Triangle grid
+date: 2015-12-30
+
+*/
+let radius = 40;
+let x, y;
+let prevX, prevY;
+let fade = true;
+let saveOne = false;
+
+function setup() {
+    size(800, 600);
+    background(0);
+    stroke(255);
+
+    x = width / 2;
+    y = height / 2;
+
+    prevX = x;
+    prevY = y;
+
+    stroke(255);
+    strokeWeight(2);
+    point(x, y);
+
+}
+
+function draw() {
+
+
+    let angle = (TWO_PI / 6) * floor(random(5.6));
+    x += cos(angle) * radius;
+    y += sin(angle) * radius;
+
+    if (x < 0 || x > width) {
+        x = prevX;
+        y = prevY;
+    }
+
+    if (y < 0 || y > height) {
+        x = prevX;
+        y = prevY;
+    }
+
+    stroke(255, 64);
+    strokeWeight(1);
+    line(x, y, prevX, prevY);
+
+    strokeWeight(3);
+    point(x, y);
+
+    prevX = x;
+    prevY = y;
+
+    if (saveOne) {
+        saveFrame("images/triangle-grid-#####.png");
+        saveOne = false;
+    }
+
+}
+
+function keyPressed() {
+    if (key == 'f') {
+        fade = !fade;
+    }
+
+    if (key == 's') {
+        saveOne = true;
+    }
+}
+
+</script>
+</html>

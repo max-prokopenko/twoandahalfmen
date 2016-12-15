@@ -11,11 +11,11 @@ var login = {
 
     },
     request: function() {
-        var username = $("#lg_username").val();
-        var password = $("#lg_password").val();
+        let username = $("#lg_username").val();
+        let password = $("#lg_password").val();
 
 
-        var sendInfo = {
+        let sendInfo = {
             "login": username,
             "password": password
         };
@@ -31,6 +31,7 @@ var login = {
             crossDomain: true,
             success: function(response) {
                 if (response == true) {
+                	login.store(response, username);
                     window.location.href = "/index.html";
                 } else {
                     alert("Cannot log");
@@ -39,6 +40,11 @@ var login = {
 
             data: JSON.stringify(sendInfo)
         });
+    },
+    store: function(boolean, username) {
+    	let userObject = { 'logged': boolean , 'username': username};
+    	
+		sessionStorage.setItem('userObject', JSON.stringify(userObject));
     },
     bindEvents: function() {
         $("#login-form").submit(function(e) {

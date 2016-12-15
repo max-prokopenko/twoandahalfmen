@@ -2,23 +2,24 @@ var kysely = {
     url: "",
     init: function() {
 
+        //this.login();
         this.load();
         this.cacheDom();
-
 
 
     },
     cacheDom: function() {
 
     },
-    select: function(id) {
-
+    select: function(id) {  
         var xmlhttp = new XMLHttpRequest();
-        var url = kysely.url + "/" + id;
+        var url = kysely.urlid;
+        //url =  url.slice(0, -8) + id;
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
                 kysely.setModal(xmlhttp.responseText);
+
             }
         }
         xmlhttp.open("GET", url, true);
@@ -26,7 +27,14 @@ var kysely = {
 
     },
     setModal: function(data) {
-        $("#kyselyBody").text(data[kysymys]);
+        data = JSON.parse(data);
+        var output = "";
+        for (var i = 0; i < data.length; i++) {
+            var kysymys = data[i].kysymys;
+            output = output + "<p>" + kysymys.kysymys + "</p>";
+        }
+        $("#kyselyBody").html(output);
+        
     },
     load: function() {
         var xmlhttp = new XMLHttpRequest();
@@ -43,11 +51,25 @@ var kysely = {
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     },
+    logout: function() {
+        sessionStorage.clear();
+        window.location.href = "/login.html";
+    },
     bindEvents: function() {
         $(".answer").on("click", function() {
             kysely.select($(this).data("id"));
         });
+        $("#logout").on("click", function() {
+            kysely.logout();
+        });
 
+    },
+    login: function() {
+        var userObject = sessionStorage.getItem('userObject');
+        if((userObject == null) || (userObject.logged == false)) {
+            
+            window.location.href = "/login.html";
+        }
     },
     render: function(dataIn) {
         var data = {

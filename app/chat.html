@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body>
+	<div class="container-fluid">
+        <div class="row">
+        	 <div class="col-xs-12 topMobile text-right">
+        	 	<i class="material-icons backTop" id="menu">&#xE5D2;</i></a>
+        	 </div>
+        </div>
+	   <div class="row">          
+					
+					
+			<div class="col-md-10 col-xs-12 main">
+	
+		
+				<div id="response" class="chatDialog"></div>
+				<div class="input row">
+					<div class="col-md-11 col-xs-10">
+						<input class="form-control chatMsgInput" type="text" id="text" placeholder="Write a message...">
+					</div>
+					<div class="col-md-1 col-xs-2 ">
+						
+						<button id="sendMessage" class="sendMsg" onclick="sendMessage();"><i class="material-icons inlineIcon">&#xE163;</i></button>
+					</div>
+				</div>
+			</div>	
+		
+	</div>
+		
+</div>
+
+</body>
+<script type="text/javascript">
+	
+	 var stompClient = null;
+ var pathname = window.location.pathname;
+	  connect();
+        
+	  function notify(sender, text) {
+		  if (!("Notification" in window)) {
+		    alert("This browser does not support desktop notification");
+		  }
+
+		  else if (Notification.permission === "granted") {
+		    var notification = new Notification(text);
+		  }
+
+		  else if (Notification.permission !== 'denied') {
+		    Notification.requestPermission(function (permission) {
+		      if (permission === "granted") {
+		        var notification = new Notification(text);
+		      }
+		    });
+		  }
+
+		  }Notification.requestPermission().then(function(result) {
+		  console.log(result);
+		});
+		  function spawnNotification(theBody,theIcon,theTitle) {
+		  var options = {
+		      body: theBody,
+		      icon: theIcon
+		  }
+		  var n = new Notification(theTitle,options);
+		}
+	        
+	        function connect() {
+	        	
+	            var socket = new SockJS("http://127.0.0.0:8080/ProJ/chat");
+	            stompClient = Stomp.over(socket);  
+	            
+	            stompClient.connect({}, function(frame) {
+	                
+	            	
+	                console.log('Connected: ' + frame);
+	                stompClient.subscribe('http://127.0.0.0:8080/ProJ/chat/topic/messages', function(messageOutput) {
+	                	
+	                    showMessageOutput(JSON.parse(messageOutput.body));
+	                });
+	            });
+	        }
+	        
+	       
+	        
+	        function sendMessage() {
+	        	
+	        	var from = username;
+	            var text = document.getElementById('text').value;
+	            $(".chatMsgInput").val("");
+	            stompClient.send("http://127.0.0.0:8080/ProJ/chat/app/chat", {}, JSON.stringify({'from':from, 'text':text}));
+	            }
+	        
+	        
+	        function showMessageOutput(messageOutput) {
+	        	
+	            var response = document.getElementById('response');
+	            
+	            var side;
+	            if(username ==  messageOutput.from){
+	            	side = "msgOwn";
+	            	 var text = $("<div class=" + side + "></div>").html("<div><img class='userImgChat' src='" + url + "/resources/images/user-default.png'><b>" + messageOutput.from + "</b> ("+ messageOutput.time +")</div><p class='msgBody'> " + messageOutput.text + "</p>");
+	  	           
+	            }
+	            else {
+	            	side = "msgOther";
+	            	 var text = $("<div class=" + side + "></div>").html("<div><b>" + messageOutput.from + "</b> ("+ messageOutput.time +")<img class='userImgChat' src='" + url + "/resources/images/user-default.png'></div><p class='msgBody'> " + messageOutput.text + "</p>");
+	            	 notify("", messageOutput.text);
+	            }
+	            
+	            
+	            $("#response").append(text);
+	            $("#response").animate({ scrollTop: $('#response')[0].scrollHeight}, 1000);
+	 	       
+	        }
+	        
+	        $(".chatMsgInput").on('keyup', function (e) {
+	            if (e.keyCode == 13) {
+	            	sendMessage();
+	            	$(".chatMsgInput").val("");
+	            }
+	        });
+</script>
+</html>
