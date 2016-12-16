@@ -3,6 +3,7 @@ var newSurvey = {
     desc: "",
     url1: "",
     url2: "",
+    urlMain: "",
     id: null,
     surveyId: null,
     survey: [],
@@ -35,12 +36,15 @@ var newSurvey = {
         }
     },
     save: function() {
+        let userObject = sessionStorage.getItem('userObject');
+        userObject = JSON.parse(userObject);
+
         newSurvey.name = $("#name").val();
         newSurvey.desc = $("#desc").val();
         let questionnairInfo = {
             "kysely_nimi": newSurvey.name,
             "kuvaus": newSurvey.desc,
-            "omistaja_id": 1
+            "omistaja_id": userObject.user_id
         };
 
         $("[data-type='q']").each(function() {
@@ -75,7 +79,7 @@ var newSurvey = {
 
                     newSurvey.surveyId = resp[2];
                     newSurvey.id = resp[5];
-                    alert(newSurvey.id);
+                    //alert(newSurvey.id);
 
                     let qUrl = newSurvey.url2 +  newSurvey.id + "/lisaaKysymys";
                     for (var i = 0; i < newSurvey.survey.length; i++) {
@@ -92,8 +96,8 @@ var newSurvey = {
     },
     info: function(id) {
         $("#newSurvey").html("");
-        $("#newSurvey").append("<div class='container'><div class='row'><div class='col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 newContainer text-center'><h3>Congratuations you just created a new survey</h3><p>Your survey code is <h4><strong>#" + newSurvey.surveyId.toUpperCase() + "</strong></h4></p><p><canvas id='qr'></canvas></p></div></div></div>");
-        newSurvey.qr(newSurvey.url2 + "#" + newSurvey.crypt(newSurvey.surveyId));
+        $("#newSurvey").append("<div class='container'><div class='row'><div class='col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 newContainer text-center'><h3>Congratuations you just created a new survey</h3><p>Your survey code is <h4><strong>#" + newSurvey.surveyId.toUpperCase() + "</strong></h4></p><p><a href='" + newSurvey.urlMain + "survey.html#" + newSurvey.crypt(newSurvey.surveyId) + "'>" + newSurvey.urlMain + "survey.html#" + newSurvey.crypt(newSurvey.surveyId) +"</a></p><p><canvas id='qr'></canvas></p></div></div></div>");
+        newSurvey.qr(newSurvey.urlMain + "survey.html#" + newSurvey.crypt(newSurvey.surveyId));
     },
     load: function(id) {  
         let xmlhttp = new XMLHttpRequest();
@@ -126,7 +130,7 @@ var newSurvey = {
             newSurvey.save();
         });
         $(document).on('click', '.close', function() {
-            $(this).parent().fadeOut().remove();
+            $(this).parent().slideUp(300).remove();
         });
        
 

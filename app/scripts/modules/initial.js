@@ -1,11 +1,48 @@
 var initial = {
     init: function() {
         this.bindEvents();
+        this.loginCheck();
     },
     logout: function() {
         sessionStorage.clear();
-        window.location.href = "/login.html";
+        $("#login").show();
+         $("#logout").hide();
+        //window.location.href = "/login.html";
     },
+    loginCheck: function() {
+        console.log("loginCheck");
+        let userObject = sessionStorage.getItem('userObject');
+         userObject = JSON.parse(userObject);
+
+        if ((userObject != null) && (userObject.logged == true)) {
+            $("#logout").show();
+        }
+        else {
+                $("#login").show();
+            }
+        
+    },
+    login: function() {
+        console.log("lgoin f");
+        let userObject = sessionStorage.getItem('userObject');
+         userObject = JSON.parse(userObject);
+
+        if (userObject != null) {
+            console.log(userObject);
+
+            if(userObject[0] == false) {
+                $("#login").click();
+            }
+            else {
+                window.location.href = "/twoandahalfmen/new.html";
+               
+            }
+        }
+        else {
+                
+        }
+        
+    },  
     bindEvents: function() {
         $("#open").on("click", function() {
             //$("#first").fadeOut(500);
@@ -20,9 +57,14 @@ var initial = {
                 } 
             }, 0);
         });
+        $("#logout").on("click", function() {
+            initial.logout();
+
+        });
+        
     },
     redirect: function(id) {
-        window.location.href = "/survey.html#" + initial.crypt(id);
+        window.location.href = "/twoandahalfmen/survey.html#" + initial.crypt(id);
     },
     crypt: function(id) {
         let CryptoJS = require("crypto-js");

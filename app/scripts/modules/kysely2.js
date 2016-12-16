@@ -7,6 +7,7 @@ var kysely = {
     index: 0,
     id: null,
     amt: 0,
+    owner: null,
     stat: [],
     init: function() {
 
@@ -70,12 +71,15 @@ var kysely = {
             }
         }
         xmlhttp.open("GET", url, true);
+        xmlhttp.onloadend = function(){
+            kysely.collect(null);
+        }
         xmlhttp.send();
 
     },  
     logout: function() {
         sessionStorage.clear();
-        window.location.href = "/login.html";
+        
     },
     next: function() {
         let data = JSON.parse(kysely.data);
@@ -122,6 +126,26 @@ var kysely = {
             kysely.save();
 
         });
+        $("#logout").on("click", function() {
+            console.log("logout");
+            kysely.logout();
+            $("#logout").hide();
+            $("#login").show();
+
+        });
+    },
+    loginCheck: function() {
+        console.log("loginCheck");
+        let userObject = sessionStorage.getItem('userObject');
+         userObject = JSON.parse(userObject);
+        
+        if ((userObject != null) && (userObject.logged == true)) {
+            if(userObject.user_id == kysely.owner) {
+                $(".chrt").show();
+                $(".box").show();
+            }
+        }
+        
     },
     show: function (nextBox) {
         nextBox.show();
@@ -165,13 +189,7 @@ var kysely = {
         }
         return questionAnswer;
     },
-    login: function() {
-        var userObject = sessionStorage.getItem('userObject');
-        if((userObject == null) || (userObject.logged == false)) {
-            
-            window.location.href = "/login.html";
-        }
-    },
+   
     save: function() {
         $("input:checkbox:checked").each(function() {
             if ($(this).prop( "checked" )) {
@@ -206,80 +224,92 @@ var kysely = {
         });    
     },
     vis: function(result) {
-       let Chart =  require('chart.js');
-       let index = 0;
-        $(".myChart").each(function(i) {
-            $(this).addClass("canvas" + i);
-            index = i;
-        });
-       for (var i = 0; i <= index; i++) {
-           let ctx = $(".canvas" + i);
-
-           let data = {
-                labels: [
-                    "Yes",
-                    "No"
-                ],
-                datasets: [
-                    {
-                        data: [result[i].yes, result[i].no],
-                        backgroundColor: [
-                            "#FF6384",
-                            "#36A2EB"
-                        ],
-                        hoverBackgroundColor: [
-                            "#FF6384",
-                            "#36A2EB"
-                        ]
-                    }]
-            };
-           var myDoughnutChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: data
-            }); 
-            } 
        
+           let Chart =  require('chart.js');
+           let index = 0;
+            $(".myChart").each(function(i) {
+                $(this).addClass("canvas" + i);
+                index = i;
+            });
+           for (var i = 0; i <= index; i++) {
+               let ctx = $(".canvas" + i);
+
+               let data = {
+                    labels: [
+                        "Yes",
+                        "No"
+                    ],
+                    datasets: [
+                        {
+                            data: [result[i].yes, result[i].no],
+                            backgroundColor: [
+                                "#FF6384",
+                                "#36A2EB"
+                            ],
+                            hoverBackgroundColor: [
+                                "#FF6384",
+                                "#36A2EB"
+                            ]
+                        }]
+                };
+               var myDoughnutChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data
+                }); 
+                } 
+        
     },
     collect: function(data) {
-        data = JSON.parse(data);
-        console.log(data.length);
-        let temp = [];
-        for (var i = 0; i < kysely.amt; i++) {
-            temp[i] = {yes: 0, no: 0};
-        }
-        let index = 0;
-        let id = data[0].kysymys_id;
-        for (var i = 0; i < data.length; i++) {
-           if(data[i].kysymys_id == id) {
-                if (data[i].vastaus == "yes") {
-                    temp[index].yes++;    
-                }
-                if (data[i].vastaus == "no") {
-                    temp[index].no++;    
-                }
-           }
-           else {
-                index++;
-                id = data[i].kysymys_id;
-                if (data[i].vastaus == "yes") {
-                    temp[index].yes++;    
-                }
-                if (data[i].vastaus == "no") {
-                    temp[index].no++;    
-                }
+        if (data != null) {
+            data = JSON.parse(data);
+            console.log(data.length);
+            let temp = [];
+            for (var i = 0; i < kysely.amt; i++) {
+                temp[i] = {yes: 0, no: 0};
             }
+            let index = 0;
+            let id = data[0].kysymys_id;
+            for (var i = 0; i < data.length; i++) {
+               if(data[i].kysymys_id == id) {
+                    if (data[i].vastaus == "yes") {
+                        temp[index].yes++;    
+                    }
+                    if (data[i].vastaus == "no") {
+                        temp[index].no++;    
+                    }
+               }
+               else {
+                    index++;
+                    id = data[i].kysymys_id;
+                    if (data[i].vastaus == "yes") {
+                        temp[index].yes++;    
+                    }
+                    if (data[i].vastaus == "no") {
+                        temp[index].no++;    
+                    }
+                }
 
+            }
+            console.log(temp);
+            this.vis(temp);
         }
-        console.log(temp);
-        this.vis(temp);
+        else {
+            //$(".chrt").hide();
+        }   
     },
     update: function() {
         kysely.getVastaus(kysely.kId);
          $("html, body").animate({ scrollTop: 0 }, 500);
+         $("input:checkbox").attr("disabled", true);
+
+         setTimeout(function() {
+            window.location.href = "/twoandahalfmen/"; 
+         }, 500);
     },
     render: function(dataIn) {
         let dataTemp = JSON.parse(dataIn);
         kysely.kId = dataTemp[0].kysely_id;
+        kysely.owner = dataTemp[0].omistaja_id;
         kysely.amt = dataTemp.length;
         kysely.getVastaus(dataTemp[0].kysely_id);
         for (var i = 0; i < dataTemp.length; i++) {
@@ -296,7 +326,7 @@ var kysely = {
        
 
         //var tpl = '{{#kyselyt}}<div class="col-md-6 col-md-offset-3 col-xs-12"><div class="row"><div class="row"><div class="col-xs-12 text-center"><div class="questionTopic">{{kysymys.kysymys}}</div></div><div class="row"><div class="col-xs-12 text-center"><div class="questionAnswer">{{kysymys.kysymys_tyyppi}}</div></div></div></div></div></div></div>{{/kyselyt}}';
-        let tpl = '{{#kyselyt}}<div class="container question col-md-6 col-md-offset-3 box">' + 
+        let tpl = '{{#kyselyt}}<div class="container question col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 box">' + 
                                     '<div class="row">' + 
                                         '<div class="questionTopic col-md-6">{{kysymys.kysymys}}</div>' + 
                                     '</div>' + 
@@ -305,13 +335,14 @@ var kysely = {
                                             '<div class="questionAnswer"><form data-kysymysid="{{kysymys.kysymys_id}}">{{{kysymys.kysymys_tyyppi}}}</form></div>' + 
                                         '</div>' + 
                                     '</div>' +
-                                     '<div class="row text-center">' +
+                                     '<div class="row text-center chrt">' +
                                         '<div class="col-xs-12 text-center"><canvas class="myChart"></canvas></div>' +
                                     '</div>' +
                                 '</div>{{/kyselyt}}'       
         var html = Mustache.to_html(tpl, data);
         $('#survey').html(html);
         $(".box").slice(1).hide();
+        kysely.loginCheck();
         kysely.bindEvents();
         
     }

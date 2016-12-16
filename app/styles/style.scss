@@ -8,7 +8,7 @@ body{
 }
 
 .hero {
-    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/images/bg.jpeg) no-repeat center center fixed;
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(http://p1.pichost.me/i/11/1344899.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -17,9 +17,12 @@ body{
     font-family: 'Oswald', sans-serif;
     color: #fff;
 }
+#logout, #login {
+	display: none;
+}
 .hero .topic {
 	font-size: 4em;
-	margin-top: 35vh;
+	margin-top: 20vh;
 	font-weight: 900 !important;
 	letter-spacing: 0.2em;
     word-spacing: 0.1em !important;
@@ -50,8 +53,14 @@ body{
  	outline: none !important;
 
 }
+.top {
+	padding-top: 10px; 
+}
+.top button {
+	margin: 20px;
+}
 #surveyBody {
-    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/images/pic1.jpeg) no-repeat center center fixed;
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(http://p1.pichost.me/i/11/1344899.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -61,10 +70,11 @@ body{
     overflow: scroll;
     
 }
+
 .myChart {
 	width: 40% !important;
 	height: auto !important;
-	margin-left: 30%;
+	display: inline-block;
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
@@ -112,7 +122,7 @@ body{
 	display: none;
 }
 #newSurvey {
-    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/images/pic1.jpeg) no-repeat center center fixed;
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(http://p1.pichost.me/i/11/1344899.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -150,3 +160,11 @@ body{
 		margin-bottom: 150px;
     }
 }
+.chrt {
+	display: none;
+}
+ @media (max-width: 768px) {
+      .top {
+              text-align: center !important;
+       } 
+    }
